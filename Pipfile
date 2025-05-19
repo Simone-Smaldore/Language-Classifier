@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 pandas = "*"
 numpy = "*"
+seaborn = "*"
+matplotlib = "*"
+jinja2 = "*"
 
 [dev-packages]
 ipykernel = "*"
