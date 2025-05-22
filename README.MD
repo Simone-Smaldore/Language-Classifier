@@ -20,3 +20,8 @@ Perchè logistic regression e NB
 Capire multinomial NB
 
 Salvare modelli e risultati per Model Evaluation
+
+Rendere path generici per sistema operativo
+
+
+Se il task del problema è trovare frasi corte in inglese e sbaglia tanto su questo potremmo pensare di aggiungere dati su questo
