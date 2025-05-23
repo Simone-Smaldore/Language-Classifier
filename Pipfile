@@ -10,6 +10,7 @@ seaborn = "*"
 matplotlib = "*"
 jinja2 = "*"
 scikit-learn = "*"
+tox = "*"
 
 [dev-packages]
 ipykernel = "*"
