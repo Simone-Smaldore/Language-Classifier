@@ -22,3 +22,5 @@ Rendere path generici per sistema operativo
 
 
 Se il task del problema è trovare frasi corte in inglese e sbaglia tanto su questo potremmo pensare di aggiungere dati con frasi corte
+
+Creare docker
