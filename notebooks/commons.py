@@ -35,6 +35,7 @@ DATASET_CLEAN_UNDERSAMPLING_LOCATION = (
 MODEL_FOLDER = "../models"
 DATASET_FOLDER = "../data/raw"
 DATASET_LOCATION = f"{DATASET_FOLDER}/Language Detection.csv"
+VECTORIZERS_FOLDER = "../vectorizers"
 
 
 class Datasets:

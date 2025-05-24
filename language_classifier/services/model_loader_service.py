@@ -3,7 +3,7 @@
 import logging
 import pickle
 
-from language_classifier.const import PATH_MODEL
+from language_classifier.const import PATH_MODEL, PATH_VECTORIZER
 
 logger = logging.getLogger("model_loader_service")
 
@@ -19,4 +19,7 @@ class ModelLoaderService:
         global model
         with PATH_MODEL.open("rb") as f:
             model = pickle.load(f)
+        global vectorizer
+        with PATH_VECTORIZER.open("rb") as f:
+            vectorizer = pickle.load(f)
         self.logger.info("Model loaded from the disk")

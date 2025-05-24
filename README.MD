@@ -37,3 +37,6 @@ Migliorare i commenti nei file di init del progetto
 
 Installare pacchetto con pip install -e .
 Aggiungere -e . ai requirements
+
+
+Considerare che la previsione funziona anche con parole non presenti nel vocabolario, ma potrebbe dare problemi di prestazioni
