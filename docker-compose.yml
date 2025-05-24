@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  language_classifier:
+    build: .
+    container_name: language_classifier
+    volumes:
+      - ./language_classifier:/app
+    ports:
+      - "5000:5000"

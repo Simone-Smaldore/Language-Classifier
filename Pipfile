@@ -14,6 +14,7 @@ tox = "*"
 flask = "*"
 flask-cors = "*"
 flask-injector = "*"
+gunicorn = "*"
 
 [dev-packages]
 ipykernel = "*"
