@@ -1,7 +1,9 @@
 """This module contains the DataPreparationService to prepare data for predictions."""
 
 import logging
-
+import unicodedata
+from scipy.sparse import csr_matrix
+from language_classifier.services.model_loader_service import ModelLoaderService
 
 logger = logging.getLogger("data_preparation_service")
 
@@ -12,3 +14,56 @@ class DataPreparationService:
     def __init__(self) -> None:
         """Initializes the class."""
         self.logger = logging.getLogger("data_preparation_service")
+
+    def prepare_data(self, text: str) -> csr_matrix:
+        cleaned_text = self._clean_text(text)
+        return ModelLoaderService().vectorizer.transform([cleaned_text])
+
+    def _clean_text(self, text: str) -> str:
+        """
+        Clean and normalizes a text string by lowercasing, removing digits, and stripping punctuation.
+
+        This function performs several text preprocessing steps:
+        - Converts all characters to lowercase.
+        - Replaces apostrophes with spaces.
+        - Removes all digits.
+        - Keeps only alphanumeric characters and whitespace.
+        - Cleans remaining Unicode characters while preserving accents (via `clean_text_keep_accents`).
+        - Normalizes whitespace to ensure consistent spacing.
+
+        Args:
+            text (str): The input text string to be cleaned.
+
+        Returns:
+            str: The cleaned and normalized text.
+
+        """
+        text = text.lower()
+        text = text.replace("'", " ")
+        text = "".join(c for c in text if not c.isdigit())
+        text = "".join(c for c in text if c.isalnum() or c.isspace())
+        # Pulizia dei caratteri unicode
+        text = self._clean_text_keep_accents(text)
+        return " ".join(text.split())
+
+    def _clean_text_keep_accents(self, text: str) -> str:
+        """
+        Clean a string by removing special characters while preserving accents.
+
+        This function removes all characters from the input string except letters,
+        numbers, and whitespace. It retains accented characters and strips out
+        special symbols, including modifier letters and punctuation.
+
+        Args:
+            text (str): The input text string to be cleaned.
+
+        Returns:
+            str: The cleaned text with accents preserved and special characters removed.
+
+        """
+        return "".join(
+            c
+            for c in text
+            if (unicodedata.category(c).startswith(("L", "N")) or c.isspace())
+            and not unicodedata.name(c, "").startswith("MODIFIER")
+        )

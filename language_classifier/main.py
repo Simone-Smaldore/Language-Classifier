@@ -13,6 +13,7 @@ from flask_injector import FlaskInjector, singleton
 
 import logging
 
+from language_classifier.services.data_preparation_service import DataPreparationService
 from language_classifier.services.model_loader_service import ModelLoaderService
 from language_classifier.services.prediction_service import PredictionService
 
@@ -29,7 +30,7 @@ def main() -> None:
     app = Flask(__name__)
     CORS(app)
     app.register_blueprint(prediction_blueprint, url_prefix="/")
-    ModelLoaderService().load_model()
+    ModelLoaderService()
     FlaskInjector(app=app, modules=[configure_injection])
     logger.info("Starting application")
     app.run(host="127.0.0.1", port=5000)
@@ -41,6 +42,7 @@ def configure_injection(binder: Binder) -> None:
     This function contains instructions for configuring injection.
     """
     binder.bind(PredictionService, to=PredictionService, scope=singleton)
+    binder.bind(DataPreparationService, to=DataPreparationService, scope=singleton)
 
 
 if __name__ == "__main__":
