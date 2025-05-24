@@ -1,8 +1,10 @@
-"""This module contains the DataPreparationService to prepare data for predictions."""
+"""Contains the DataPreparationService to prepare data for predictions."""
 
 import logging
 import unicodedata
+
 from scipy.sparse import csr_matrix
+
 from language_classifier.services.model_loader_service import ModelLoaderService
 
 logger = logging.getLogger("data_preparation_service")
@@ -12,10 +14,24 @@ class DataPreparationService:
     """Class used to prepare the data for the predictions."""
 
     def __init__(self) -> None:
-        """Initializes the class."""
+        """Initialize the class."""
         self.logger = logging.getLogger("data_preparation_service")
 
     def prepare_data(self, text: str) -> csr_matrix:
+        """
+        Preprocess and transform input text into a sparse feature matrix.
+
+        This method cleans the input text using an internal cleaning function
+        and then transforms the cleaned text into a sparse matrix representation
+        using a preloaded vectorizer from the ModelLoaderService.
+
+        Args:
+            text (str): The raw input text to preprocess.
+
+        Returns:
+            csr_matrix: The sparse matrix representation of the processed text.
+
+        """
         cleaned_text = self._clean_text(text)
         return ModelLoaderService().vectorizer.transform([cleaned_text])
 
@@ -42,7 +58,6 @@ class DataPreparationService:
         text = text.replace("'", " ")
         text = "".join(c for c in text if not c.isdigit())
         text = "".join(c for c in text if c.isalnum() or c.isspace())
-        # Pulizia dei caratteri unicode
         text = self._clean_text_keep_accents(text)
         return " ".join(text.split())
 

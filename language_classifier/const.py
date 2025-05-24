@@ -1,4 +1,5 @@
-"""Files of constants.
+"""
+Files of constants.
 
 This script contains the constants used in the project to define the paths of the files.
 """

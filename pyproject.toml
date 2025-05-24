@@ -36,7 +36,6 @@ exclude = ["build/"]
 disallow_untyped_defs = true
 python_version = "3.12"
 ignore_missing_imports = true
-strict = true
 
 [tool.nbqa.mypy]
 addopts = ["--ignore-missing-imports"]

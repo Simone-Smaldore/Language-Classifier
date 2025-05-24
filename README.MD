@@ -32,3 +32,5 @@ Aggiungere -e . ai requirements
 
 Considerare che la previsione funziona anche con parole non presenti nel vocabolario, ma potrebbe dare problemi di prestazioni
 Il problema è che se il testo non ha nessuna parola presente nel dizionario, Verrà predetto Inglese di default
+
+Check se pipeline tox funzionano da cold start
