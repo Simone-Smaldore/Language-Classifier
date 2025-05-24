@@ -17,6 +17,10 @@ flask-injector = "*"
 
 [dev-packages]
 ipykernel = "*"
+pytest = "*"
+mypy = "*"
+ruff = "*"
+nbqa = "*"
 
 [requires]
 python_version = "3.12"

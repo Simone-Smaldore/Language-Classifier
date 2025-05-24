@@ -31,6 +31,9 @@ exclude = ["build/"]
     "D100", # Missing docstring in public module
     "T201", # Print found
 ]
+"tests/**" = [
+    "S101", # Use of assert detected
+]
 
 [tool.mypy]
 disallow_untyped_defs = true

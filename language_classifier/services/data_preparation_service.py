@@ -32,10 +32,10 @@ class DataPreparationService:
             csr_matrix: The sparse matrix representation of the processed text.
 
         """
-        cleaned_text = self._clean_text(text)
+        cleaned_text = self.clean_text(text)
         return ModelLoaderService().vectorizer.transform([cleaned_text])
 
-    def _clean_text(self, text: str) -> str:
+    def clean_text(self, text: str) -> str:
         """
         Clean and normalizes a text string by lowercasing, removing digits, and stripping punctuation.
 

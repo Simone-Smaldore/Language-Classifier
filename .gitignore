@@ -3,3 +3,7 @@ language_classifier/language_classifier.egg-info/*
 .venv/*
 language_classifier/logging_module/__pycache__/*
 language_classifier.egg-info/*
+language_classifier/__pycache__/*
+language_classifier/services/*
+tests/__pycache__/*
+

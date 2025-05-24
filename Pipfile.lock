@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "78b5a6da5de5fe3494f25de634848f74a524958840aaae2320a657fa0f3e3e3d"
+            "sha256": "e617e7c0abcd496ccf19b8e7747c856d116937de2056939bdea4a0f3fa039b73"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -216,6 +216,14 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==4.58.0"
+        },
+        "iniconfig": {
+            "hashes": [
+                "sha256:3abbd2e30b36733fee78f9c7f7308f2d0050e88f0087fd25c2645f63c773e1c7",
+                "sha256:9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==2.1.0"
         },
         "injector": {
             "hashes": [
@@ -680,6 +688,15 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==1.9.1"
+        },
+        "pytest": {
+            "hashes": [
+                "sha256:c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820",
+                "sha256:f4efe70cc14e511565ac476b57c279e12a855b11f48f212af1080ef2263d3845"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==8.3.5"
         },
         "python-dateutil": {
             "hashes": [
