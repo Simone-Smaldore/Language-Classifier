@@ -24,3 +24,13 @@ Rendere path generici per sistema operativo
 Se il task del problema è trovare frasi corte in inglese e sbaglia tanto su questo potremmo pensare di aggiungere dati con frasi corte
 
 Creare docker
+
+Usare widget python per mostrare le confusion matrix sul notebook
+Creare pipeline tox differenti per lint e test
+
+Check pipefile e generare requirements
+Creare readme 
+
+Commentare notebook
+
+Migliorare i commenti nei file di init del progetto

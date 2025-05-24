@@ -1,9 +1,27 @@
+[project]
+name = "language_classifier"
+requires-python = ">=3.12"
+dynamic = ["version"]
+
 [tool.ruff]
 line-length = 150
 target-version = "py312"
 lint.select = ["ALL"]
 lint.ignore = [
-    "N803", # Argument should be lowercase
+    "N803",  # Argument should be lowercase
+    "N806",  # Variable in function should be lowercase
+    "S301",  # Pickle unsafe for untrasted data
+    "PD901", # Avoid using generic variable df
+    "D203",  # Conflicts with D211: Requires a blank line before class docstring; disabled to avoid incompatibility.
+    "D212",  # Conflicts with D213: Requires summary to be on the first line of multi-line docstring; disabled to follow Google style.
+    "T201",  # Print found
+]
+exclude = ["build/"]
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/**" = [
+    "N999", # Invalid module name
+    "D100", # Missing docstring in public module
     "T201", # Print found
 ]
 
@@ -19,3 +37,5 @@ addopts = ["--ignore-missing-imports"]
 [tool.nbqa.exclude]
 notebooks = ["*/.ipynb_checkpoints/*"]
 
+[tool.ruff.lint.pylint]
+max-args = 10
