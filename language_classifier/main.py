@@ -13,6 +13,7 @@ from flask_injector import FlaskInjector, singleton
 
 import logging
 
+from language_classifier.services.model_loader_service import ModelLoaderService
 from language_classifier.services.prediction_service import PredictionService
 
 
@@ -28,11 +29,9 @@ def main() -> None:
     app = Flask(__name__)
     CORS(app)
     app.register_blueprint(prediction_blueprint, url_prefix="/")
-
-    logger.info("Starting application")
-
+    ModelLoaderService().load_model()
     FlaskInjector(app=app, modules=[configure_injection])
-
+    logger.info("Starting application")
     app.run(host="127.0.0.1", port=5000)
 
 
