@@ -11,6 +11,9 @@ matplotlib = "*"
 jinja2 = "*"
 scikit-learn = "*"
 tox = "*"
+flask = "*"
+flask-cors = "*"
+flask-injector = "*"
 
 [dev-packages]
 ipykernel = "*"

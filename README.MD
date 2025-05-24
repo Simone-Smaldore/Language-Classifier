@@ -34,3 +34,6 @@ Creare readme
 Commentare notebook
 
 Migliorare i commenti nei file di init del progetto
+
+Installare pacchetto con pip install -e .
+Aggiungere -e . ai requirements

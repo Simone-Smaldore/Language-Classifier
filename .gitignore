@@ -1,2 +1,5 @@
 src/main.egg-info/*
-src/language_classifier.egg-info/*
+language_classifier/language_classifier.egg-info/*
+.venv/*
+language_classifier/logging_module/__pycache__/*
+language_classifier.egg-info/*
