@@ -4,6 +4,7 @@ import logging
 import pickle
 
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import MultinomialNB
 
 from language_classifier.const import PATH_MODEL, PATH_VECTORIZER
@@ -43,7 +44,7 @@ class ModelLoaderService:
         if not hasattr(self, "vectorizer"):
             self.vectorizer = self._load_vectorizer()
 
-    def _load_model(self) -> MultinomialNB:
+    def _load_model(self) -> MultinomialNB | GridSearchCV:
         with PATH_MODEL.open("rb") as f:
             model = pickle.load(f)
         self.logger.info("Model loaded from the disk")
