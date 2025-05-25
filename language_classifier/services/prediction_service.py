@@ -20,7 +20,7 @@ class PredictionService:
         self,
         phrase: str,
         data_preparation_service: DataPreparationService,
-    ) -> tuple[int, str]:
+    ) -> int:
         """
         Predict the language of a given phrase.
 
@@ -44,4 +44,4 @@ class PredictionService:
             num_words_embedded,
         )
         pred = ModelLoaderService().model.predict(prepared_data)[0]
-        return int(pred), "Italian" if pred == ITALIAN_PRED else "English"
+        return int(pred)

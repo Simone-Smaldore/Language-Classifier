@@ -1,7 +1,7 @@
 """
 Define the main prediction route.
 
-This route is used to predict whether a given phrase is in Italian or English.
+This route is used to predict whether a given phrase is in Italian or not.
 """
 
 from flask import Blueprint, Response, jsonify, request
@@ -40,8 +40,8 @@ def predict(
     if not text:
         return jsonify({"error": "No text provided"}), 400
 
-    prediction, result_language = prediction_service.predict_phrase_language(
+    prediction = prediction_service.predict_phrase_language(
         text,
         data_preparation_service,
     )
-    return jsonify({"prediction": prediction, "language": result_language})
+    return jsonify({"prediction": prediction})

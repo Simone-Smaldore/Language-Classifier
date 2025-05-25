@@ -25,7 +25,6 @@ from scipy.sparse import csr_matrix
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.preprocessing import LabelEncoder
 
 PROCESSED_DATASET_FOLDER = "../data/processed"
 DATASET_CLEAN_LOCATION = f"{PROCESSED_DATASET_FOLDER}/Language Detection Clean.csv"
@@ -102,7 +101,7 @@ def vectorize_and_split_dataset(
 
     """
     X = vectorizer.fit_transform(df["Text"])
-    y = LabelEncoder().fit_transform(df["Language"])
+    y = df["Binary Language"]
     X, X_t, y, y_t, text, text_t = train_test_split(
         X,
         y,
