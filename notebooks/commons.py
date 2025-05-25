@@ -83,7 +83,7 @@ def vectorize_and_split_dataset(
 
     This function takes a DataFrame with text data and corresponding language labels,
     applies the provided vectorizer to transform the text into feature vectors,
-    encodes the language labels, and splits everything into training and test subsets
+    and splits everything into training and test subsets
     with stratification to preserve class distribution.
 
     Args:
