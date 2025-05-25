@@ -38,8 +38,8 @@ This choice was made not only for its solid performance on small datasets, but a
 ###### 1. Create a virtual environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # or .\venv\Scripts\activate on Windows
+python -m venv .venv
+source .venv/bin/activate  # or .\.venv\Scripts\activate on Windows
 ```
 
 ###### 2. Install dependencies

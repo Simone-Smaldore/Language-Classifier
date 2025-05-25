@@ -2,7 +2,6 @@
 
 import logging
 
-from language_classifier.const import ITALIAN_PRED
 from language_classifier.services.data_preparation_service import DataPreparationService
 from language_classifier.services.model_loader_service import ModelLoaderService
 
