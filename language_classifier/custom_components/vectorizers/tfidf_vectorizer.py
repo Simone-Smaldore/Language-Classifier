@@ -32,7 +32,7 @@ class TfidfVectorizerCustom(VectorizerCustom):
         Calls the superclass initializer and sets up an empty IDF list.
         """
         super().__init__()
-        self.idf = []
+        self.idf: list[float] = []
 
     def fit_transform(self, input_phrases: Iterable[str]) -> csr_matrix:
         """
@@ -48,9 +48,9 @@ class TfidfVectorizerCustom(VectorizerCustom):
             csr_matrix: Normalized TF-IDF sparse matrix representation of the phrases.
 
         """
-        n_docs = len(input_phrases)
-        doc_freq = defaultdict(int)
-        vocab = defaultdict(lambda: len(vocab))
+        n_docs = len(list(input_phrases))
+        doc_freq: dict[int, int] = defaultdict(int)
+        vocab: dict[str, int] = defaultdict(lambda: len(vocab))
 
         # First pass: build vocabulary and document frequency counts
         tokenized_docs = []
@@ -76,7 +76,7 @@ class TfidfVectorizerCustom(VectorizerCustom):
         # Second pass: compute TF-IDF matrix
         rows, cols, data = [], [], []
         for i, token_ids in enumerate(tokenized_docs):
-            tf = defaultdict(int)
+            tf: dict[int, int] = defaultdict(int)
             for idx in token_ids:
                 tf[idx] += 1
             max_tf = max(tf.values())
@@ -101,11 +101,11 @@ class TfidfVectorizerCustom(VectorizerCustom):
             csr_matrix: Normalized TF-IDF sparse matrix of the input documents.
 
         """
-        n_docs = len(input_phrases)
+        n_docs = len(list(input_phrases))
         rows, cols, data = [], [], []
 
         for i, doc in enumerate(input_phrases):
-            tf = defaultdict(int)
+            tf: dict[int, int] = defaultdict(int)
             tokens = self._tokenize(doc)
             for token in tokens:
                 if token in self.vocab:

@@ -42,9 +42,9 @@ class CountVectorizerCustom(VectorizerCustom):
 
         """
         rows, cols, data = [], [], []
-        vocab = defaultdict(lambda: len(vocab))
+        vocab: dict[str, int] = defaultdict(lambda: len(vocab))
         for i, doc in enumerate(input_phrases):
-            word_counts = defaultdict(int)
+            word_counts: dict[int, int] = defaultdict(int)
             for token in self._tokenize(doc):
                 word_id = vocab[token]
                 word_counts[word_id] += 1
@@ -56,7 +56,7 @@ class CountVectorizerCustom(VectorizerCustom):
         self.vocab_size = len(self.vocab)
         return csr_matrix(
             (data, (rows, cols)),
-            shape=(len(input_phrases), self.vocab_size),
+            shape=(len(list(input_phrases)), self.vocab_size),
         )
 
     def transform(self, input_phrases: Iterable[str]) -> csr_matrix:
@@ -76,7 +76,7 @@ class CountVectorizerCustom(VectorizerCustom):
         rows, cols, data = [], [], []
 
         for i, doc in enumerate(input_phrases):
-            word_counts = defaultdict(int)
+            word_counts: dict[int, int] = defaultdict(int)
             for token in self._tokenize(doc):
                 if token in self.vocab:
                     word_id = self.vocab[token]
@@ -88,5 +88,5 @@ class CountVectorizerCustom(VectorizerCustom):
 
         return csr_matrix(
             (data, (rows, cols)),
-            shape=(len(input_phrases), self.vocab_size),
+            shape=(len(list(input_phrases)), self.vocab_size),
         )

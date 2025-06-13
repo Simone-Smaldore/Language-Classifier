@@ -28,8 +28,8 @@ class VectorizerCustom(ABC):
         Sets up an empty dictionary to map words to indices and
         initializes the vocabulary size to zero.
         """
-        self.vocab = {}
-        self.vocab_size = 0
+        self.vocab: dict[str, int] = {}
+        self.vocab_size: int = 0
 
     @abstractmethod
     def fit_transform(self, input_phrases: Iterable[str]) -> csr_matrix:

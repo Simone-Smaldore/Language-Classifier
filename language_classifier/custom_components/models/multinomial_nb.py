@@ -32,9 +32,6 @@ class MultinomialNBCustom(ModelCustom, ClassifierMixin, BaseEstimator):
 
         """
         self.alpha = alpha
-        self.log_prob_prior = None
-        self.log_prob_cond = None
-        self.classes_ = None
 
     def fit(self, X: csr_matrix, y: NDArray[np.float64]) -> None:
         """

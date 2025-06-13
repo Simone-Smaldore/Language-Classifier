@@ -57,7 +57,6 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
         self.threshold = threshold
         self.lambda_coeff = lambda_coeff
         self.gradient_tolerance = gradient_tolerance
-        self.w = None
         self.b = 0
 
     def fit(self, X: csr_matrix, y: NDArray[np.float64]) -> None:

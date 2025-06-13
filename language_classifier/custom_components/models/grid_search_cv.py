@@ -21,7 +21,7 @@ class GridSearchCVCustom:
 
     Attributes:
         model_class (type[ModelCustom]): The model class to be tuned.
-        param_grid (dict[str, list[str]]): Dictionary defining parameters and their candidate values.
+        param_grid (dict[str, list[Any]]): Dictionary defining parameters and their candidate values.
         cv (int): Number of folds for cross-validation.
         scoring (str): Metric used for evaluation ('accuracy' supported).
         best_model (ModelCustom): Best fitted model after grid search.
@@ -37,7 +37,7 @@ class GridSearchCVCustom:
     def __init__(
         self,
         model_class: type[ModelCustom],
-        param_grid: dict[str, list[str]],
+        param_grid: dict[str, list[Any]],
         cv: int = 5,
         scoring: str = "accuracy",
     ) -> None:
@@ -46,7 +46,7 @@ class GridSearchCVCustom:
 
         Args:
             model_class (type[ModelCustom]): The model class to tune.
-            param_grid (dict[str, list[str]]): Hyperparameters and their candidate values.
+            param_grid (dict[str, list[Any]]): Hyperparameters and their candidate values.
             cv (int, optional): Number of cross-validation folds. Default is 5.
             scoring (str, optional): Scoring metric for evaluation. Default is 'accuracy'.
 
@@ -55,9 +55,8 @@ class GridSearchCVCustom:
         self.param_grid = param_grid
         self.cv = cv
         self.scoring = scoring
-        self.best_model: ModelCustom = None
         self.best_score = -np.inf
-        self.best_params = {}
+        self.best_params: dict = {}
 
     def _score(self, y_true: NDArray[np.int32], y_pred: NDArray[np.int32]) -> float:
         """
@@ -123,9 +122,9 @@ class GridSearchCVCustom:
             avg_score = np.mean(scores)
 
             if avg_score > self.best_score:
-                self.best_score = avg_score
+                self.best_score = float(avg_score)
                 self.best_params = params
-        self.best_model = self.model_class(**self.best_params)
+        self.best_model: ModelCustom = self.model_class(**self.best_params)
         self.best_model.fit(X, y)
         print(f"Best params: {self.best_params}")
 
