@@ -1,71 +1,11 @@
-import numpy as np
-import pandas as pd
 from scipy.sparse import csr_matrix
 from collections import defaultdict
 import math
-import re
 from typing import Iterable
-from abc import ABC, abstractmethod
 from sklearn.preprocessing import normalize
-
-
-class VectorizerCustom(ABC):
-
-    def __init__(self):
-        self.vocab = {}
-        self.vocab_size = 0
-
-    @abstractmethod
-    def fit_transform(self, corpus: Iterable[str]) -> csr_matrix:
-        pass
-
-    @abstractmethod
-    def transform(self, corpus: Iterable[str]) -> csr_matrix:
-        pass
-
-    def get_feature_names_out(self) -> list[str]:
-        sorted_vocab = sorted(self.vocab.items(), key=lambda x: x[1])
-        return [word for word, idx in sorted_vocab]
-
-    def _tokenize(self, text: str) -> list[str]:
-        return re.findall(r"\b\w+\b", text)
-
-
-class CountVectorizerCustom(VectorizerCustom):
-    def __init__(self):
-        super().__init__()
-
-    def fit_transform(self, corpus: Iterable[str]) -> csr_matrix:
-        rows, cols, data = [], [], []
-        vocab = defaultdict(lambda: len(vocab))
-        for i, doc in enumerate(corpus):
-            word_counts = defaultdict(int)
-            for token in self._tokenize(doc):
-                word_id = vocab[token]
-                word_counts[word_id] += 1
-            for word_id, count in word_counts.items():
-                data.append(count)
-                rows.append(i)
-                cols.append(word_id)
-        self.vocab = dict(vocab)
-        self.vocab_size = len(self.vocab)
-        return csr_matrix((data, (rows, cols)), shape=(len(corpus), self.vocab_size))
-
-    def transform(self, corpus: Iterable[str]) -> csr_matrix:
-        rows, cols, data = [], [], []
-
-        for i, doc in enumerate(corpus):
-            word_counts = defaultdict(int)
-            for token in self._tokenize(doc):
-                if token in self.vocab:
-                    word_id = self.vocab[token]
-                    word_counts[word_id] += 1
-            for word_id, count in word_counts.items():
-                data.append(count)
-                rows.append(i)
-                cols.append(word_id)
-
-        return csr_matrix((data, (rows, cols)), shape=(len(corpus), self.vocab_size))
+from language_classifier.custom_components.vectorizers.vectorizer_custom import (
+    VectorizerCustom,
+)
 
 
 class TfidfVectorizerCustom(VectorizerCustom):

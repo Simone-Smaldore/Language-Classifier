@@ -6,4 +6,8 @@ language_classifier.egg-info/*
 language_classifier/__pycache__/*
 language_classifier/services/*
 tests/__pycache__/*
+notebooks/__pycache__/*
+language_classifier/custom_components/__pycache__/*
+language_classifier/custom_components/vectorizers/__pycache__/*
+language_classifier/custom_components/models/__pycache__/*
 
