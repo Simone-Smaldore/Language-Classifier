@@ -51,22 +51,14 @@ class MultinomialNBCustom(ModelCustom, ClassifierMixin, BaseEstimator):
         n_samples, n_features = X.shape
         self.classes_ = np.unique(y)
         n_classes = len(self.classes_)
-
-        # Inizializza matrici
         class_count = np.zeros(n_classes)
         feature_count = np.zeros((n_classes, n_features))
-
         y = np.array(y)
         for idx, c in enumerate(self.classes_):
-            # Seleziona i documenti della classe c
             X_c = X[y == c]
             class_count[idx] = X_c.shape[0]
             feature_count[idx, :] = X_c.sum(axis=0)
-
-        # Calcolo della log prior
         self.log_prob_prior = np.log(class_count / n_samples)
-
-        # Calcolo della probabilità condizionata P(w | c)
         smoothed_fc = feature_count + self.alpha
         smoothed_cc = smoothed_fc.sum(axis=1).reshape(-1, 1)
         self.log_prob_cond = np.log(smoothed_fc / smoothed_cc)
