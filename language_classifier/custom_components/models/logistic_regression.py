@@ -12,14 +12,14 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
     """
     Custom implementation of logistic regression classifier.
 
-    This class implements a binary logistic regression model with L2 regularization,
+    This class implements a binary logistic regression model with regularization,
     trained using gradient descent with early stopping based on the norm of the gradient.
 
     Attributes:
         learning_rate (float): Step size for gradient descent updates.
         epochs (int): Maximum number of training iterations.
         threshold (float): Decision threshold for classifying samples.
-        lambda_coeff (float): Regularization coefficient for L2 penalty.
+        lambda_coeff (float): Regularization coefficient for penalty.
         gradient_tolerance (float): Threshold for the gradient norm to trigger early stopping.
         w (NDArray): Weight vector learned during training.
         b (float): Bias term learned during training.
@@ -40,6 +40,7 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
         threshold: float = 0.5,
         lambda_coeff: float = 1e-6,
         gradient_tolerance: float = 1e-4,
+        penalty: str = "l2",
     ) -> None:
         """
         Initialize the LogisticRegressionCustom instance with training parameters.
@@ -48,8 +49,9 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
             learning_rate (float, optional): Gradient descent step size. Default is 0.1.
             epochs (int, optional): Maximum number of iterations to run during training. Default is 1000.
             threshold (float, optional): Threshold for converting probabilities to binary labels. Default is 0.5.
-            lambda_coeff (float, optional): L2 regularization strength. Default is 1e-6.
+            lambda_coeff (float, optional): Regularization strength. Default is 1e-6.
             gradient_tolerance (float, optional): Gradient norm threshold for early stopping. Default is 1e-4.
+            penalty (str, optional): Regularization penalty for the regression.
 
         """
         self.learning_rate = learning_rate
@@ -58,6 +60,7 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
         self.lambda_coeff = lambda_coeff
         self.gradient_tolerance = gradient_tolerance
         self.b = 0
+        self.penalty = penalty
 
     def fit(self, X: csr_matrix, y: NDArray[np.float64]) -> None:
         """
@@ -68,7 +71,7 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
             y (NDArray[np.float64]): Target binary labels array of shape (n_samples,).
 
         Notes:
-            - Uses L2 regularization with coefficient `lambda_coeff`.
+            - Uses regularization with coefficient `lambda_coeff`.
             - Implements early stopping if the norm of the weight gradient falls below `gradient_tolerance`.
 
         """
@@ -80,7 +83,8 @@ class LogisticRegressionCustom(ModelCustom, ClassifierMixin, BaseEstimator):
             z = X.dot(self.w) + self.b
             y_pred = self._sigmoid(z)
             error = y_pred - y
-            dw = (X.T.dot(error) / n_samples) + self.lambda_coeff * self.w
+            regularization_coeff = self.w if self.penalty == "l2" else np.sign(self.w)
+            dw = (X.T.dot(error) / n_samples) + self.lambda_coeff * regularization_coeff
             db = np.sum(error) / n_samples
             if np.linalg.norm(dw) < self.gradient_tolerance:
                 print(

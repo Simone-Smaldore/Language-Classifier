@@ -22,6 +22,13 @@ Text preprocessing was followed by vectorization using two common strategies:
 - **Bag of Words (BoW)**
 - **TF-IDF (Term Frequency-Inverse Document Frequency)**
 
+The analysis included both pre-built models and vectorizers from the **scikit-learn** library as well as custom-built models developed from scratch.  
+
+- Using scikit-learn’s implementations allowed for leveraging well-tested, efficient algorithms and vectorization techniques, facilitating rapid experimentation and benchmarking.  
+
+- At the same time, constructing models from scratch provided deeper insights into the inner workings of the algorithms and enabled tailored modifications to better fit the specific requirements of the language identification task.  
+
+
 After comparing performance metrics on a validation set, both **Multinomial Naive Bayes** and **Logistic Regression** showed similar results in terms of accuracy.
 
 > ✅ **Multinomial Naive Bayes** combined with **Bag of Words (BoW)** was ultimately selected
@@ -111,7 +118,9 @@ tox run -e test
 1. **Data Exploration** – Initial dataset analysis
 2. **Data Cleaning** – Text preprocessing and normalization
 3. **Train Model** – Training NLP models
+3b. **Train Model Scratch Algo** – Training NLP models using models implemented from scratch
 4. **Model Evaluation** – Metrics and performance comparisons
+4b. **Model Evaluation Scratch Algo** – Metrics and performance comparisons for models implemented from scratch
 
 --------------------------------------------------------------------
 
